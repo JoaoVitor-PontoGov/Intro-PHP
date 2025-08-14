@@ -17,31 +17,47 @@
       align-items: center;
     }
 
-    #frmCadastroPessoa{
+    #frmCadastroPessoa, #frmCalcularMedia{
       display: flex;
       flex-direction: column;
       width: 30%;
+      margin-top: 25px;
+      gap: 5px;
     }
     
   </style>
 
   <script>
     $(function(){
-      $("#BtnEnviar").click(function(){
+      $("#BtnCadastroPessoa").click(function(){
+        $.post(
+          "script.php",
+          {
+            dsNome: $("#dsNome").val(),
+            dsIdade: $("#dsIdade").val(),
+            flGenero: $("#flGenero").val()
+          },
+          function(response){
+            console.log(response)
+          }
+        )
+    })
+    
+    $("#BtnCadastroNota").click(function() {
       $.post(
-        "script.php",
+        "controller.php?action=calcularMedia",
         {
-          dsNome: $("#dsNome").val(),
-          dsIdade: $("#dsIdade").val(),
-          flGenero: $("#flGenero").val()
-        },
-        function(response){
+          dsNota1: $("#dsNota1").val(),
+          dsNota2: $("#dsNota2").val(),
+          dsNota3: $("#dsNota3").val(),
+          dsNota4: $("#dsNota4").val()
+        }, 
+        function(response) {
           console.log(response)
         }
       )
     })
     })
-    
   </script>
   </head>
 
@@ -63,12 +79,22 @@
     <option value="F">Feminino</option>
     <option value="O">Outro</option>
   </select>
-  <button type="button" id="BtnEnviar">Enviar</button>
+  <button type="button" id="BtnCadastroPessoa">Enviar</button>
 
 </form>
 
 <hr style="border: solid black 1px; width: 75%;">
 
-
+<form id="frmCalcularMedia">
+    <label for="dsNota1">Nota 1:</label>
+    <input type="number" name="dsNota1" id="dsNota1">
+    <label for="dsNota2">Nota 2:</label>
+    <input type="number" name="dsNota2" id="dsNota2">
+    <label for="dsNota3">Nota 3:</label>
+    <input type="number" name="dsNota3" id="dsNota3">
+    <label for="dsNota4">Nota 4:</label>
+    <input type="number" name="dsNota4" id="dsNota4">
+    <button type="button" id="BtnCadastroNota">Enviar</button>
+</form>
 </body>
 </html>

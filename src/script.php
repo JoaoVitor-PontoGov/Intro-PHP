@@ -1,7 +1,8 @@
 <?php
 
-$dataHoraRequisicao = time();
+date_default_timezone_set('America/Sao_Paulo');
 
+$nome = $_POST["dsNome"];
 $idade = $_POST["dsIdade"];
 $genero = "";
 
@@ -31,7 +32,6 @@ $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
 echo "User Agent: " . $userAgent . "\n";
 
-date_default_timezone_set('America/Sao_Paulo');
+$dataHoraRequisicao = time();
 
 echo "Data e hora da requisicao: " . date('m/d/Y H:i:s', $dataHoraRequisicao). "";
-
