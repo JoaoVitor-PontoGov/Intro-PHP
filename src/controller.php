@@ -5,23 +5,23 @@ $action = $_GET["action"];
 
 switch ($action) {
   case 'calcularMedia':
-    $nota1 = $_POST["dsNota1"];
-    $nota2 = $_POST["dsNota2"];
-    $nota3 = $_POST["dsNota3"];
-    $nota4 = $_POST["dsNota4"];
+    $nota1 = $_POST["vlNota1"];
+    $nota2 = $_POST["vlNota2"];
+    $nota3 = $_POST["vlNota3"];
+    $nota4 = $_POST["vlNota4"];
 
     $media = ($nota1 + $nota2 + $nota3 + $nota4)/4;
     $notas = array($nota1, $nota2, $nota3, $nota4);
     $maiorNota = 0;
     $menorNota = 10;
 
-    for ($i=0; $i < count($notas); $i++) { 
-      if($notas[$i] > $maiorNota){
-        $maiorNota = $notas[$i];
+    foreach ($notas as $nota) {
+      if($nota > $maiorNota){
+        $maiorNota = $nota;
       }
 
-      if($notas[$i] < $menorNota){
-        $menorNota = $notas[$i];
+      if($nota < $menorNota){
+        $menorNota = $nota;
       }
     }
 
@@ -68,5 +68,27 @@ switch ($action) {
     $resposta = array("data" => $mensagens);
     echo json_encode($resposta);
     break;
-  
+  case 'calcularData':
+    $dataSelecionada = new DateTime($_GET["date"]);
+    $dataAtual = new DateTime();
+
+    $diferenca = $dataAtual->diff($dataSelecionada);
+
+    $dia = $diferenca->d;
+    $hora = $diferenca->h;
+    $minuto = $diferenca->i;
+
+    $mensagens = "";
+
+    if($diferenca->invert != 0){
+      $mensagens .= "O dia selecionado ja passou ha: ";
+    } else {
+      $mensagens .= "O dia selecionado chegara em: ";
+    }
+
+    $mensagens .= $diferenca->format('%d dias, %i horas e %i minutos');
+
+    $resposta = array("data" => $mensagens);
+    echo json_encode($resposta);
+    break;
 }

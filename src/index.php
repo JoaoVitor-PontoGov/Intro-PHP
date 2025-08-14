@@ -55,10 +55,10 @@
         $.post(
           "controller.php?action=calcularMedia",
           {
-            dsNota1: $("#frmCalcularMedia #dsNota1").val(),
-            dsNota2: $("#frmCalcularMedia #dsNota2").val(),
-            dsNota3: $("#frmCalcularMedia #dsNota3").val(),
-            dsNota4: $("#frmCalcularMedia #dsNota4").val()
+            vlNota1: $("#frmCalcularMedia #vlNota1").val(),
+            vlNota2: $("#frmCalcularMedia #vlNota2").val(),
+            vlNota3: $("#frmCalcularMedia #vlNota3").val(),
+            vlNota4: $("#frmCalcularMedia #vlNota4").val()
           }, 
           function(response) {
             console.log(response.data)
@@ -77,6 +77,16 @@
           },
           function(response) {
             console.log(response.data)
+          },
+          "json"
+        )
+      })
+
+      $("#frmCalcularData #BtnCalcularData").click(function() {
+        $.post(
+          "controller.php?action=calcularData&date="+ $("#dtSelecionada").val(),
+          function(response) {
+            console.log(response.data);
           },
           "json"
         )
@@ -109,14 +119,14 @@
 <hr>
 
 <form id="frmCalcularMedia">
-    <label for="dsNota1">Nota 1:</label>
-    <input type="number" name="dsNota1" id="dsNota1">
-    <label for="dsNota2">Nota 2:</label>
-    <input type="number" name="dsNota2" id="dsNota2">
-    <label for="dsNota3">Nota 3:</label>
-    <input type="number" name="dsNota3" id="dsNota3">
-    <label for="dsNota4">Nota 4:</label>
-    <input type="number" name="dsNota4" id="dsNota4">
+    <label for="vlNota1">Nota 1:</label>
+    <input type="number" name="vlNota1" id="vlNota1">
+    <label for="vlNota2">Nota 2:</label>
+    <input type="number" name="vlNota2" id="vlNota2">
+    <label for="vlNota3">Nota 3:</label>
+    <input type="number" name="vlNota3" id="vlNota3">
+    <label for="vlNota4">Nota 4:</label>
+    <input type="number" name="vlNota4" id="vlNota4">
     <button type="button" id="BtnCalcularMedia">Enviar</button>
 </form>
 
@@ -128,6 +138,14 @@
     <label for="dsPeso">Informe seu peso</label>
     <input type="numeric" name="dsPeso" id="dsPeso">
     <button type="button" id="BtnCalcularIMC">Enviar</button>
+</form>
+
+<hr>
+
+<form id="frmCalcularData">
+  <label for="dtSelecionada">Seleione um dia</label>
+  <input type="date" name="dtSelecionada" id="dtSelecionada">
+  <button type="button" id="BtnCalcularData">Enviar</button>
 </form>
 
 </body>
