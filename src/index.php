@@ -17,46 +17,70 @@
       align-items: center;
     }
 
-    #frmCadastroPessoa, #frmCalcularMedia{
+    #frmCadastroPessoa, 
+    #frmCalcularMedia,
+    #frmCalcularIMC
+    {
       display: flex;
       flex-direction: column;
       width: 30%;
       margin-top: 25px;
       gap: 5px;
     }
+
+    hr{
+      border: solid black 1px; 
+      width: 75%;
+    }
     
   </style>
 
   <script>
     $(function(){
-      $("#BtnCadastroPessoa").click(function(){
+      $("#frmCadastroPessoa #BtnCadastroPessoa").click(function(){
         $.post(
           "script.php",
           {
-            dsNome: $("#dsNome").val(),
-            dsIdade: $("#dsIdade").val(),
-            flGenero: $("#flGenero").val()
+            dsNome: $("#frmCadastroPessoa #dsNome").val(),
+            dsIdade: $("#frmCadastroPessoa #dsIdade").val(),
+            flGenero: $("#frmCadastroPessoa #flGenero").val()
           },
           function(response){
             console.log(response)
           }
         )
-    })
+      })
     
-    $("#BtnCadastroNota").click(function() {
-      $.post(
-        "controller.php?action=calcularMedia",
-        {
-          dsNota1: $("#dsNota1").val(),
-          dsNota2: $("#dsNota2").val(),
-          dsNota3: $("#dsNota3").val(),
-          dsNota4: $("#dsNota4").val()
-        }, 
-        function(response) {
-          console.log(response)
-        }
-      )
-    })
+      $("#frmCalcularMedia #BtnCalcularMedia").click(function() {
+        $.post(
+          "controller.php?action=calcularMedia",
+          {
+            dsNota1: $("#frmCalcularMedia #dsNota1").val(),
+            dsNota2: $("#frmCalcularMedia #dsNota2").val(),
+            dsNota3: $("#frmCalcularMedia #dsNota3").val(),
+            dsNota4: $("#frmCalcularMedia #dsNota4").val()
+          }, 
+          function(response) {
+            console.log(response.data)
+          },
+          "json"
+        )
+      })
+      
+      $("#frmCalcularIMC #BtnCalcularIMC").click(function() {
+        console.log("!");
+        $.post(
+          "controller.php?action=calcularIMC",
+          {
+            dsAltura: $("#frmCalcularIMC #dsAltura").val(),
+            dsPeso: $("#frmCalcularIMC #dsPeso").val()
+          },
+          function(response) {
+            console.log(response.data)
+          },
+          "json"
+        )
+      })
     })
   </script>
   </head>
@@ -80,10 +104,9 @@
     <option value="O">Outro</option>
   </select>
   <button type="button" id="BtnCadastroPessoa">Enviar</button>
-
 </form>
 
-<hr style="border: solid black 1px; width: 75%;">
+<hr>
 
 <form id="frmCalcularMedia">
     <label for="dsNota1">Nota 1:</label>
@@ -94,7 +117,18 @@
     <input type="number" name="dsNota3" id="dsNota3">
     <label for="dsNota4">Nota 4:</label>
     <input type="number" name="dsNota4" id="dsNota4">
-    <button type="button" id="BtnCadastroNota">Enviar</button>
+    <button type="button" id="BtnCalcularMedia">Enviar</button>
 </form>
+
+<hr>
+
+<form id="frmCalcularIMC">
+    <label for="dsAltura">Informe sua altura</label>
+    <input type="numeric" name="dsAltura" id="dsAltura">
+    <label for="dsPeso">Informe seu peso</label>
+    <input type="numeric" name="dsPeso" id="dsPeso">
+    <button type="button" id="BtnCalcularIMC">Enviar</button>
+</form>
+
 </body>
 </html>
