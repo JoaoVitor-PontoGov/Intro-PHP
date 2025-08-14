@@ -1,6 +1,7 @@
 <?php
 
-$nome = $_POST["dsNome"];
+$dataHoraRequisicao = time();
+
 $idade = $_POST["dsIdade"];
 $genero = "";
 
@@ -20,4 +21,17 @@ echo "Em 10 anos voce tera: " . $idadeFutura . " anos \n";
 if($idade>=18)
   echo "Voce e maior de idade \n";
 else
-  echo "voce nao e maior de idade";
+  echo "Voce nao e maior de idade \n";
+
+$ipUsuario = $_SERVER["REMOTE_ADDR"];
+
+echo "Seu IP e: " . $ipUsuario . "\n";
+
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+echo "User Agent: " . $userAgent . "\n";
+
+date_default_timezone_set('America/Sao_Paulo');
+
+echo "Data e hora da requisicao: " . date('m/d/Y H:i:s', $dataHoraRequisicao). "";
+

@@ -10,12 +10,19 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <style> 
+
+    body{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     #frmCadastroPessoa{
       display: flex;
       flex-direction: column;
-      justify-content: center;
       width: 30%;
     }
+    
   </style>
 
   <script>
@@ -42,6 +49,8 @@
 
 <body>
   
+<h1>Intro PHP</h1>
+
 <form id="frmCadastroPessoa">
   <label for="dsNome">Insira seu nome</label>
   <input type="text" name="dsNome" id="dsNome" >
@@ -54,9 +63,12 @@
     <option value="F">Feminino</option>
     <option value="O">Outro</option>
   </select>
-  <input type="button" id="BtnEnviar" value="Enviar">
+  <button type="button" id="BtnEnviar">Enviar</button>
 
 </form>
+
+<hr style="border: solid black 1px; width: 75%;">
+
 
 </body>
 </html>
